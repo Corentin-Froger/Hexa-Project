@@ -24,57 +24,41 @@ public class Partie {
         return new Partie(joueur, motADeviner, nbEssais, false);
     }
 
-    // getter joueur
     public Joueur getJoueur() {
         return this.joueur;
     }
 
-    // getter nombre d'essais
     public int getNbEssais() {
         return this.nbEssais;
     }
 
-    // getter mot à deviner
     public String getMot() {
         return this.motADeviner;
     }
 
-    // si le nombre max d'essais n'est pas atteint
+    // si le nombre max d'essais n'est pas atteint,
     // on compare la proposition au mot secret
     // et on renvoie la réponse
     // si toutes les lettres sont correctement placées,
     // on a terminé la partie
-    public Reponse tourDeJeu(String motPropose) {
+    public Reponse proposerMot(String motPropose) {
         nbEssais++; // Pourquoi dès le début ?
-        verifieNbEssais();
-        if (!this.partieTerminee) {
+        if (!isTerminee()) {
             var r = new Reponse(this.motADeviner);
-            r.compare(motPropose);
+            r.verifierEssai(motPropose);
             if (r.lettresToutesPlacees()) {
-                this.partieTerminee = true;
+                terminerPartie();
             }
-
             return r;
         }
         return new Reponse(this.motADeviner);
     }
 
-    // vérifie que le nombre d'essais max n'est pas atteint
-    private void verifieNbEssais() {
-        if (this.nbEssais >= NB_ESSAIS_MAX) {
-            this.partieTerminee = true;
-        }
-        //TBD
-    }
-
-    // la partie est-elle terminée
     public boolean isTerminee() {
-        return this.partieTerminee;
+        return this.partieTerminee || this.nbEssais >= NB_ESSAIS_MAX;
     }
 
-    // la partie est terminée
-    void done() {
+    public void terminerPartie() {
         this.partieTerminee = true;
-        //TBD
     }
 }

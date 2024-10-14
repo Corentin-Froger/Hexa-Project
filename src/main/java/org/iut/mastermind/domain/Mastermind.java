@@ -4,7 +4,6 @@ import org.iut.mastermind.domain.partie.Joueur;
 import org.iut.mastermind.domain.partie.Partie;
 import org.iut.mastermind.domain.partie.PartieRepository;
 import org.iut.mastermind.domain.partie.ResultatPartie;
-import org.iut.mastermind.domain.proposition.Reponse;
 import org.iut.mastermind.domain.tirage.MotsRepository;
 import org.iut.mastermind.domain.tirage.ServiceNombreAleatoire;
 import org.iut.mastermind.domain.tirage.ServiceTirageMot;
@@ -47,11 +46,11 @@ public class Mastermind {
         return ResultatPartie.ERROR;
     }
 
-    // on évalue le résultat du mot proposé pour le tour de jeu
-    // on met à jour la bd pour la partie
+    // on évalue le résultat du mot proposé pour le tour de jeu,
+    // on met à jour la bd pour la partie,
     // on retourne le résulat de la partie
     private ResultatPartie calculeResultat(Partie partie, String motPropose) {
-        var res = ResultatPartie.create(partie.tourDeJeu(motPropose), partie.isTerminee());
+        var res = ResultatPartie.create(partie.proposerMot(motPropose), partie.isTerminee());
         this.partieRepository.update(partie);
         return res;
     }

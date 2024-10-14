@@ -11,7 +11,7 @@ public class MotSecret {
     // du mot essayé avec le mot secret
     public Reponse compareProposition(String essai) {
         var r = new Reponse(motSecret);
-        r.compare(essai);
+        r.verifierEssai(essai);
         return r;
     }
 }
