@@ -9,19 +9,19 @@ public class Partie {
     private int nbEssais;
     private boolean partieTerminee;
 
-    public Partie(Joueur joueur, String motADeviner, int nbEssais, boolean partieTerminee) {
+    public Partie(Joueur joueur, String motADeviner, int nbEssais) {
         this.joueur = joueur;
         this.motADeviner = motADeviner;
         this.nbEssais = nbEssais;
-        this.partieTerminee = partieTerminee;
+        this.partieTerminee = false;
     }
 
     public static Partie create(Joueur joueur, String motADeviner) {
-        return new Partie(joueur, motADeviner, 0, false);
+        return new Partie(joueur, motADeviner, 0);
     }
 
     public static Partie create(Joueur joueur, String motADeviner, int nbEssais) {
-        return new Partie(joueur, motADeviner, nbEssais, false);
+        return new Partie(joueur, motADeviner, nbEssais);
     }
 
     public Joueur getJoueur() {
